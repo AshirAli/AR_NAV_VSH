@@ -1,26 +1,37 @@
 # AR_NAV_VSH
 
-OVERVIEW
+## OVERVIEW
 Location based augmented reality android application for navigation.
-GOALS
+
+## GOALS
+
 1. Admins with the ability to set up real-time augmented reality navigation for a specific area
 using markers.
 2. Users can navigate routes in AR that are already set up by admins.
 3. Point of interest (POI) placements at desired locations.
 4. POI including images from phone gallery.
-TECHNICAL REQUIREMENTS
-● Mapbox SDK
+
+## TECHNICAL REQUIREMENTS
+
+### Mapbox SDK
+
 ○ Get location data from gps.
 ○ Location data includes latitude and longitude.
-● ARCore SDK
+
+### ARCore SDK
+
 ○ Marker placement based on location data provided.
 ○ Navigation through markers.
 ○ POI placement.
-● Backend
+
+### Backend
+
 ○ Store markers location data.
 ○ Store POI placement locations.
 ○ Store images in POI.
-● UI/UX
+
+### UI/UX
+
 ○ Admin Panel -
 ■ Setup Navigation.
 ■ Setup POI.
