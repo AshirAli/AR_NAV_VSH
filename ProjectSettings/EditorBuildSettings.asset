@@ -4,5 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Samples/ARCore Extensions/1.22.0/Persistent Cloud Anchor Sample/Scenes/PersistentCloudAnchors.unity
+    guid: a1cbde3cab63248f4bbf8d8ad6586754
+  m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 8a14c96145077ba43b3b66ebfc360067,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 2b15899544188614c934fa452279f84a,
+      type: 2}
