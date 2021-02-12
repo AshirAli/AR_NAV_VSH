@@ -111,6 +111,8 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
                 {
                     Controller.ResolvingSet.Add(_history.Collection[index].Id);
                 }
+
+                //CALL FIND PATH HERE
             }
 
             // Add Cloud Anchor Ids from input field.

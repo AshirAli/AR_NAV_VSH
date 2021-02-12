@@ -39,6 +39,7 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
         /// </summary>
         public PersistentCloudAnchorsController Controller;
 
+        public LocalizeMarkers MappingController;
         /// <summary>
         /// The 3D object that represents a Cloud Anchor.
         /// </summary>
@@ -465,7 +466,7 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
                     Controller.AnchorManager.ResolveCloudAnchorId(cloudId);
                 if (cloudAnchor == null)
                 {
-                    Debug.LogFormat("Faild to resolve Cloud Anchor " + cloudId);
+                    Debug.LogFormat("Failed to resolve Cloud Anchor " + cloudId);
                     OnAnchorResolvedFinished(false, cloudId);
                 }
                 else
@@ -498,7 +499,8 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
                         Debug.LogFormat("Succeed to resolve the Cloud Anchor: {0}",
                             cloudAnchor.cloudAnchorId);
                         OnAnchorResolvedFinished(true, cloudAnchor.cloudAnchorId);
-                        Instantiate(CloudAnchorPrefab, cloudAnchor.transform);
+                        GameObject marker = Instantiate(CloudAnchorPrefab, cloudAnchor.transform);
+                        MappingController.AddMarkers(marker);
                     }
 
                     _cachedCloudAnchors.Add(cloudAnchor);
@@ -578,7 +580,7 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
                 case PersistentCloudAnchorsController.ApplicationMode.Resolving:
                     // Initial instruction for resolving flow:
                     InstructionText.text =
-                        "Look at the location you expect to see the AR experience appear.";
+                        "Look at the location you expect to see the AR marker.";
                     DebugText.text = string.Format("Attempting to resolve {0} anchors...",
                         Controller.ResolvingSet.Count);
                     return;
