@@ -3039,6 +3039,7 @@ MonoBehaviour:
   pointer: {fileID: 5753628669258077635}
   routeAnchorPrefab: {fileID: 1362899771367802, guid: 48e43bbe3af404986bbdc5a552e5fefd,
     type: 3}
+  routeSetting: 0
 --- !u!4 &994017514
 Transform:
   m_ObjectHideFlags: 0

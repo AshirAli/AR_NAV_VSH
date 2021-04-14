@@ -344,7 +344,6 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
 
                 _anchor = Controller.AnchorManager.AddAnchor(hitPose);
 
-                //_anchor = gameObject.AddComponent<ARAnchor>();
             }
 
             if (_anchor != null)
@@ -500,7 +499,10 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
                             cloudAnchor.cloudAnchorId);
                         OnAnchorResolvedFinished(true, cloudAnchor.cloudAnchorId);
                         GameObject marker = Instantiate(CloudAnchorPrefab, cloudAnchor.transform);
-                        MappingController.AddMarkers(marker);
+
+                        //MappingController.AddMarkers(marker);
+                        //For localizing markers & mapping
+                        DebugText.text = string.Format("Cloud anchor position : {0}.", marker.transform.position);
                     }
 
                     _cachedCloudAnchors.Add(cloudAnchor);
@@ -559,6 +561,9 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
                 InstructionText.text = "Resolve success!";
                 DebugText.text =
                     string.Format("Succeed to resolve the Cloud Anchor: {0}.", cloudId);
+
+                //Calling local anchor placement
+                MappingController.routeSetting = true;
             }
             else
             {

@@ -1,1 +1,8 @@
 AR Nav gps
+
+Host marker
+Resolve marker
+Treat each marker as starting point
+place gameobjects w.r.t to resolved marker
+save gameobjects position w.r.t to resolved marker
+Navigation : resolve marker -> place gameobjects on their resp. position -> arrow rotate towards gameobjects
