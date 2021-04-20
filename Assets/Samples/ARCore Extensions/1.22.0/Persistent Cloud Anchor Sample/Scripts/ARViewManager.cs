@@ -185,6 +185,7 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
         public void Awake()
         {
             _activeColor = SaveButton.GetComponentInChildren<Text>().color;
+
         }
 
         /// <summary>
@@ -562,8 +563,6 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
                 DebugText.text =
                     string.Format("Succeed to resolve the Cloud Anchor: {0}.", cloudId);
 
-                //Calling local anchor placement
-                MappingController.routeSetting = true;
             }
             else
             {

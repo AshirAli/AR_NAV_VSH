@@ -100,7 +100,7 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
         /// input field.
         /// </summary>
         public void OnResolvingSelectionChanged()
-        {
+        {/*
             Controller.ResolvingSet.Clear();
 
             // Add Cloud Anchor Ids from multiselection dropdown.
@@ -126,7 +126,7 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
             }
 
             // Update resolve button.
-            SetButtonActive(ResolveButton, Controller.ResolvingSet.Count > 0);
+            SetButtonActive(ResolveButton, Controller.ResolvingSet.Count > 0);*/
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
             SetButtonActive(ResolveButton, false);
             InvalidInputWarning.SetActive(false);
             InputField.text = string.Empty;
-            _history = Controller.LoadCloudAnchorHistory();
+            //_history = Controller.LoadCloudAnchorHistory();
 
             Multiselection.OnValueChanged += OnResolvingSelectionChanged;
             var options = new List<MultiselectionDropdown.OptionData>();

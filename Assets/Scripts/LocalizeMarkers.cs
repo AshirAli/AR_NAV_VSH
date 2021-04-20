@@ -8,59 +8,57 @@ using UnityEngine.XR.ARSubsystems;
 
 public class LocalizeMarkers : MonoBehaviour
 {
+    /// <summary>
+    /// The main controller.
+    /// </summary>
+    public UIController Controller;
 
-    public PersistentCloudAnchorsController Controller;
+    /// <summary>
+    /// Current view manager.
+    /// </summary>
+    public ViewManager ViewManager;
 
-    //private CloudAnchorHistoryCollection _history = new CloudAnchorHistoryCollection();
+    /// <summary>
+    /// The 3D object that represents a pointer for navigation.
+    /// </summary>
+    public GameObject pointer;
+
+    /// <summary>
+    /// The main camera.
+    /// </summary>
+    public GameObject ARCamera;
+
+    /// <summary>
+    /// The active ARSessionOrigin used in the example.
+    /// </summary>
+    public ARSessionOrigin SessionOrigin;
+
+    public Dictionary<string, List<GameObject>> Routes;
+    
+    [HideInInspector]
+    public string routeName;
 
     private List<GameObject> placedMarkers;
 
-    public GameObject pointer;
+    private List<GameObject> savedMarkers;
 
-    public GameObject routeAnchorPrefab;
+    private Vector3 targetDirection, newDirection;
 
-    [HideInInspector]
-    public bool routeSetting;
+    private float distanceToMarker;
 
-    Vector3 targetDirection, newDirection;
-
-    float distanceToMarker;
-
-
+    private int currentMarker;
 
     public void Start()
     {
         pointer.SetActive(false);
         placedMarkers = new List<GameObject>();
-        routeSetting = false;
+
+        Routes = new Dictionary<string, List<GameObject>>();
     }
 
     void Update()
     {
-        if (routeSetting)
-        {
-            PlaceRouteObjects();
-        }
-    }
 
-    public void FindPath()
-    {
-        if(placedMarkers.Count > 0)
-        {
-            pointer.SetActive(true);
-            Debug.Log("Finding path...");
-            foreach(GameObject marker in placedMarkers)
-            {
-                targetDirection = marker.transform.position - pointer.transform.position;
-                distanceToMarker = Vector3.Distance(marker.transform.position, pointer.transform.position);
-                
-                if(distanceToMarker < 0.3f) {
-                    newDirection = Vector3.RotateTowards(pointer.transform.forward, targetDirection, Time.deltaTime, 0.0f);
-                    pointer.transform.rotation = Quaternion.LookRotation(newDirection);
-                    marker.SetActive(false);
-                }
-            }
-        }
     }
 
     public void AddMarkers(GameObject marker)
@@ -68,49 +66,76 @@ public class LocalizeMarkers : MonoBehaviour
         placedMarkers.Add(marker);
     }
 
-    public void PlaceRouteObjects()
+    public void ClearMarkers()
     {
-        Debug.Log("Placing route objects");
-        Touch touch;
-        if (Input.touchCount < 1 ||
-    (touch = Input.GetTouch(0)).phase != TouchPhase.Began)
+        foreach (GameObject marker in placedMarkers)
         {
-            return;
+            marker.SetActive(false);
         }
-        // Ignore the touch if it's pointing on UI objects.
-        if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
-        {
-            return;
-        }
-
-        // Perform hit test and place a pawn object.
-        PerformHitTest(touch.position);
+        placedMarkers = new List<GameObject>();
     }
 
-    private void PerformHitTest(Vector2 touchPos)
+    public bool SaveRoute(string routeName)
     {
-        List<ARRaycastHit> hitResults = new List<ARRaycastHit>();
-        Controller.RaycastManager.Raycast(
-            touchPos, hitResults, TrackableType.PlaneWithinPolygon);
+        if (Routes.ContainsKey(routeName))
+            return false;
 
-        //var planeType = PlaneAlignment.HorizontalUp;
-        if (hitResults.Count > 0)
+        Routes.Add(routeName, placedMarkers);
+
+        foreach(GameObject marker in placedMarkers)
         {
-            ARPlane plane = Controller.PlaneManager.GetPlane(hitResults[0].trackableId);
-            if (plane == null)
+            marker.SetActive(false);
+        }
+        placedMarkers = new List<GameObject>();
+
+        return true;
+    }
+
+    public void FindPath()
+    {
+
+        Debug.Log("Finding Path to " + routeName);
+
+        savedMarkers = new List<GameObject>(Routes[routeName]);
+
+        Debug.Log("savedMarkers : " + savedMarkers.Count);
+
+        if (savedMarkers.Count > 0)
+        {
+            StartCoroutine("PointerUpdate");
+        }
+    }
+
+    IEnumerator PointerUpdate()
+    {
+        pointer.SetActive(true);
+
+        //distanceToMarker = Vector3.Distance(savedMarkers[0].transform.position, pointer.transform.position);
+        //Debug.Log("Distance to first marker : " + distanceToMarker);
+
+        currentMarker = 0;
+        
+        while (currentMarker < savedMarkers.Count)
+        {
+            savedMarkers[currentMarker].SetActive(true);
+           
+            distanceToMarker = Vector3.Distance(SessionOrigin.camera.transform.position, savedMarkers[currentMarker].transform.position);
+            Debug.Log("Distance to marker : " + distanceToMarker);
+
+            targetDirection = SessionOrigin.camera.transform.position - savedMarkers[currentMarker].transform.position;
+            //newDirection = Vector3.RotateTowards(pointer.transform.forward, targetDirection, Time.deltaTime, 0.0f);
+            pointer.transform.rotation = Quaternion.LookRotation(-targetDirection);
+
+            if (distanceToMarker < 2f)
             {
-                Debug.LogWarningFormat("Failed to find the ARPlane with TrackableId {0}",
-                    hitResults[0].trackableId);
-                return;
+                savedMarkers[currentMarker].SetActive(false);
+                currentMarker++;
             }
 
-            //planeType = plane.alignment;
-            var hitPose = hitResults[0].pose;
-            var routeAnchor = Instantiate(routeAnchorPrefab, hitPose.position, hitPose.rotation);
-            routeSetting = false;
-            Debug.Log("Placed local anchor : " + routeAnchor.transform.position);
+            yield return new WaitForSeconds(0.5f);
         }
 
-        
+        pointer.SetActive(false);
+        ViewManager.OnReachingDestination();
     }
 }
