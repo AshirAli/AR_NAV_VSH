@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "ce071717b4f29129047e",
         "name": "com.HashY2K.AR_NAV_VSH",
-        "processId": 24018,
+        "processId": 27933,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -11,67 +11,37 @@
         {
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 20393,
+            "processId": 25334,
             "exited": true
         },
         {
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 29700,
+            "processId": 27055,
             "exited": true
         },
         {
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 31107,
+            "processId": 21405,
             "exited": true
         },
         {
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 2904,
+            "processId": 22847,
             "exited": true
         },
         {
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 4972,
+            "processId": 25569,
             "exited": true
         },
         {
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 14741,
-            "exited": false
-        },
-        {
-            "deviceId": "ce071717b4f29129047e",
-            "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 17114,
-            "exited": false
-        },
-        {
-            "deviceId": "ce071717b4f29129047e",
-            "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 18309,
-            "exited": false
-        },
-        {
-            "deviceId": "ce071717b4f29129047e",
-            "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 18971,
-            "exited": false
-        },
-        {
-            "deviceId": "ce071717b4f29129047e",
-            "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 22821,
-            "exited": false
-        },
-        {
-            "deviceId": "ce071717b4f29129047e",
-            "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 24018,
+            "processId": 27933,
             "exited": false
         },
         {

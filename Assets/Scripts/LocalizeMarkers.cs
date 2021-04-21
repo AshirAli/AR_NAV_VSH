@@ -85,7 +85,7 @@ public class LocalizeMarkers : MonoBehaviour
     {
         pointer.SetActive(false);
 
-        if (placedMarkers.Count > 0)
+        if (placedMarkers != null && placedMarkers.Count > 0)
         {
             foreach (GameObject marker in placedMarkers)
             {
@@ -93,7 +93,7 @@ public class LocalizeMarkers : MonoBehaviour
             }
         }
             
-        if(savedMarkers.Count > 0)
+        if(savedMarkers != null && savedMarkers.Count > 0)
         {
             foreach(GameObject marker in savedMarkers)
             {

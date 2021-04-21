@@ -49,13 +49,20 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
         /// </summary>
         public LocalizeMarkers MappingController;
 
+        /// <summary>
+        /// The Gallery controller.
+        /// </summary>
+        public GetMedia MediaController;
 
         /// <summary>
         /// The 3D object that represents a Cloud Anchor.
         /// </summary>
         public GameObject CloudAnchorPrefab;
 
-        int anchorNumber = 0;
+        /// <summary>
+        /// The 3D object that represents a Cloud Anchor.
+        /// </summary>
+        public GameObject POIPrefab;
 
         /// <summary>
         /// The UI element that displays the instructions to guide hosting experience.
@@ -106,6 +113,11 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
         /// The button to save current cloud anchor id into clipboard.
         /// </summary>
         public Button SaveButton;
+
+        /// <summary>
+        /// Current placed anchor number.
+        /// </summary>
+        int anchorNumber = 0;
 
         /// <summary>
         /// The time between enters AR View and ARCore session starts to host or resolve.
@@ -226,6 +238,7 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
                     ReturnToHomePage("Invalid application mode, returning to home page...");
                     break;
                 case UIController.ApplicationMode.Hosting:
+                case UIController.ApplicationMode.POI:
                 case UIController.ApplicationMode.Resolving:
                     InstructionText.text = "Detecting flat surface...";
                     DebugText.text = "ARCore is preparing for " + Controller.Mode;
@@ -268,7 +281,7 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
             {
                 //MappingController.FindPath();
             }
-            else if (Controller.Mode == UIController.ApplicationMode.Hosting)
+            else if (Controller.Mode == UIController.ApplicationMode.Hosting || Controller.Mode == UIController.ApplicationMode.POI)
             {
                 // Perform hit test and place an anchor on the hit test result.
 
@@ -317,8 +330,16 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
 
                 var hitPose = hitResults[0].pose;
 
-                HostingCloudAnchors(hitPose);
-                Debug.Log("AnchorManager AddAnchor");
+                if (Controller.Mode == UIController.ApplicationMode.Hosting)
+                {
+                    HostingCloudAnchors(hitPose);
+                    Debug.Log("AnchorManager AddAnchor");
+                }
+                else if (Controller.Mode == UIController.ApplicationMode.POI)
+                {
+                    PlacePOI(hitPose);
+                    Debug.Log("POI Anchor");
+                }
             }
         }
 
@@ -343,16 +364,33 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
 
         }
 
+        private void PlacePOI(Pose hit)
+        {
+            var poiAnchor = Instantiate(POIPrefab, hit.position, Quaternion.Euler(-90, -SessionOrigin.camera.transform.forward.magnitude, 0));
+
+            DebugText.text = "Instantiated POI ";
+            Debug.Log("Instantiated POI ");
+
+            MediaController.GetImage(poiAnchor);
+        }
         private void UpdateInitialInstruction()
         {
             switch (Controller.Mode)
             {
                 case UIController.ApplicationMode.Hosting:
+                
                     // Initial instruction for hosting flow:
                     InstructionText.text = "Tap to place marker.";
                     DebugText.text = "Tap a horizontal plane...";
                     ClearButton.gameObject.SetActive(true);
                     return;
+
+                case UIController.ApplicationMode.POI:
+                    // Initial instruction for POI placement:
+                    InstructionText.text = "Tap to place POI marker.";
+                    DebugText.text = "Tap a horizontal plane...";
+                    return;
+
                 case UIController.ApplicationMode.Resolving:
                     // Initial instruction for resolving flow:
                     InstructionText.text =

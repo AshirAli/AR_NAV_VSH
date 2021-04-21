@@ -81,6 +81,11 @@ public class UIController : MonoBehaviour
         /// <summary>
         /// Reset Cloud Anchors.
         /// </summary>
+        POI,
+
+        /// <summary>
+        /// Reset Cloud Anchors.
+        /// </summary>
         Ending,
     }
 
@@ -161,6 +166,15 @@ public class UIController : MonoBehaviour
     {
         Mode = ApplicationMode.Resolving;
         SwitchToResolveMenu();
+    }
+
+    /// <summary>
+    /// Callback handling POI button click event in Home Page.
+    /// </summary>
+    public void OnPOIButtonClicked()
+    {
+        Mode = ApplicationMode.POI;
+        SwitchToARView();
     }
 
     /// <summary>
