@@ -77,6 +77,11 @@ public class UIController : MonoBehaviour
         /// Resolving Cloud Anchors.
         /// </summary>
         Resolving,
+
+        /// <summary>
+        /// Reset Cloud Anchors.
+        /// </summary>
+        Ending,
     }
 
     /// <summary>
@@ -126,8 +131,9 @@ public class UIController : MonoBehaviour
     {
         // On home page, pressing 'back' button quits the app.
         // Otherwise, returns to home page.
-        if (Input.GetKeyUp(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape))
         {
+            Debug.Log("Back button");
             if (HomePage.activeSelf)
             {
                 Application.Quit();
@@ -166,6 +172,7 @@ public class UIController : MonoBehaviour
         Mode = ApplicationMode.Ready;
         //ResolvingSet.Clear();
         HomePage.SetActive(true);
+        MappingController.ClearMarkers();
     }
 
     /// <summary>
@@ -193,6 +200,14 @@ public class UIController : MonoBehaviour
     {
         ResetAllViews();
         ARView.SetActive(true);
+    }
+
+    /// <summary>
+    /// Callback handling reaching destination event.
+    /// </summary>
+    public void OnReachingDestination()
+    {
+        Mode = ApplicationMode.Ending;
     }
 
     private void ResetAllViews()

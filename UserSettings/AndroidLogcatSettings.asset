@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "ce071717b4f29129047e",
         "name": "com.HashY2K.AR_NAV_VSH",
-        "processId": 18933,
+        "processId": 24018,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -11,97 +11,67 @@
         {
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 11743,
+            "processId": 20393,
             "exited": true
         },
         {
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 14258,
+            "processId": 29700,
             "exited": true
         },
         {
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 16402,
+            "processId": 31107,
             "exited": true
         },
         {
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 18266,
+            "processId": 2904,
             "exited": true
         },
         {
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 18588,
+            "processId": 4972,
             "exited": true
         },
         {
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 19470,
+            "processId": 14741,
             "exited": false
         },
         {
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 20937,
+            "processId": 17114,
             "exited": false
         },
         {
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 19479,
+            "processId": 18309,
             "exited": false
         },
         {
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 25016,
+            "processId": 18971,
             "exited": false
         },
         {
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 26787,
+            "processId": 22821,
             "exited": false
         },
         {
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 8453,
-            "exited": false
-        },
-        {
-            "deviceId": "ce071717b4f29129047e",
-            "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 10222,
-            "exited": false
-        },
-        {
-            "deviceId": "ce071717b4f29129047e",
-            "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 11708,
-            "exited": false
-        },
-        {
-            "deviceId": "ce071717b4f29129047e",
-            "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 15678,
-            "exited": false
-        },
-        {
-            "deviceId": "ce071717b4f29129047e",
-            "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 17019,
-            "exited": false
-        },
-        {
-            "deviceId": "ce071717b4f29129047e",
-            "name": "com.HashY2K.AR_NAV_VSH",
-            "processId": 18933,
+            "processId": 24018,
             "exited": false
         },
         {
@@ -126,6 +96,12 @@
             "deviceId": "25.129.61.254:5555",
             "name": "com.HashY2K.AR_NAV_VSH",
             "processId": 1175,
+            "exited": false
+        },
+        {
+            "deviceId": "192.168.1.15:5555",
+            "name": "com.HashY2K.AR_NAV_VSH",
+            "processId": 15832,
             "exited": false
         }
     ],

@@ -197,15 +197,6 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
             anchorNumber = 0;
         }
 
-
-        /// <summary>
-        /// Callback handling reaching destination event.
-        /// </summary>
-        public void OnReachingDestination()
-        {
-            DestinationPanel.SetActive(true);
-        }
-
         /// <summary>
         /// The Unity Awake() method.
         /// </summary>
@@ -247,33 +238,6 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
         /// </summary>
         public void OnDisable()
         {
-/*
-            if (_anchor != null)
-            {
-                Destroy(_anchor.gameObject);
-                _anchor = null;
-            }
-
-            if (_pendingCloudAnchors.Count > 0)
-            {
-                foreach (var anchor in _pendingCloudAnchors)
-                {
-                    Destroy(anchor.gameObject);
-                }
-
-                _pendingCloudAnchors.Clear();
-            }
-
-            if (_cachedCloudAnchors.Count > 0)
-            {
-                foreach (var anchor in _cachedCloudAnchors)
-                {
-                    Destroy(anchor.gameObject);
-                }
-
-                _cachedCloudAnchors.Clear();
-            }
-*/
             UpdatePlaneVisibility(false);
         }
 
@@ -294,7 +258,7 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
                 return;
             }
 
-            ARCoreLifecycleUpdate();
+            //ARCoreLifecycleUpdate();
             if (_isReturning)
             {
                 return;
@@ -302,7 +266,7 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
 
             if (Controller.Mode == UIController.ApplicationMode.Resolving)
             {
-                MappingController.FindPath();
+                //MappingController.FindPath();
             }
             else if (Controller.Mode == UIController.ApplicationMode.Hosting)
             {
@@ -325,6 +289,10 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
                 // Perform hit test and place a pawn object.
                 PerformHitTest(touch.position);
 
+            }
+            else if (Controller.Mode == UIController.ApplicationMode.Ending)
+            {
+                DestinationPanel.SetActive(true);
             }
 
         }
@@ -388,8 +356,9 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
                 case UIController.ApplicationMode.Resolving:
                     // Initial instruction for resolving flow:
                     InstructionText.text =
-                        "You should be near the first marker placed.";
+                        "Follow the direction of AR Pointer.";
                     ClearButton.gameObject.SetActive(false);
+                    MappingController.FindPath();
                     /*DebugText.text = string.Format("Attempting to resolve {0} anchors...",
                         Controller.ResolvingSet.Count);*/
                     return;

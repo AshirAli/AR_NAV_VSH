@@ -48,6 +48,10 @@ public class LocalizeMarkers : MonoBehaviour
 
     private int currentMarker;
 
+    /// <summary>
+    /// Unity start method.
+    /// </summary>
+
     public void Start()
     {
         pointer.SetActive(false);
@@ -56,25 +60,54 @@ public class LocalizeMarkers : MonoBehaviour
         Routes = new Dictionary<string, List<GameObject>>();
     }
 
+    /// <summary>
+    /// Unity update method.
+    /// </summary>
+
     void Update()
     {
 
     }
+
+    /// <summary>
+    /// Add passed marker into list of markers.
+    /// </summary>
 
     public void AddMarkers(GameObject marker)
     {
         placedMarkers.Add(marker);
     }
 
+    /// <summary>
+    /// Clear all markers from list.
+    /// </summary>
     public void ClearMarkers()
     {
-        foreach (GameObject marker in placedMarkers)
+        pointer.SetActive(false);
+
+        if (placedMarkers.Count > 0)
         {
-            marker.SetActive(false);
+            foreach (GameObject marker in placedMarkers)
+            {
+                marker.SetActive(false);
+            }
         }
+            
+        if(savedMarkers.Count > 0)
+        {
+            foreach(GameObject marker in savedMarkers)
+            {
+                marker.SetActive(false);
+            }
+        }
+
         placedMarkers = new List<GameObject>();
+        savedMarkers = new List<GameObject>();
     }
 
+    /// <summary>
+    /// Save given route into route dictionary.
+    /// </summary>
     public bool SaveRoute(string routeName)
     {
         if (Routes.ContainsKey(routeName))
@@ -91,6 +124,9 @@ public class LocalizeMarkers : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Find path using current selected route.
+    /// </summary>
     public void FindPath()
     {
 
@@ -106,12 +142,12 @@ public class LocalizeMarkers : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Coroutine method.
+    /// </summary>
     IEnumerator PointerUpdate()
     {
         pointer.SetActive(true);
-
-        //distanceToMarker = Vector3.Distance(savedMarkers[0].transform.position, pointer.transform.position);
-        //Debug.Log("Distance to first marker : " + distanceToMarker);
 
         currentMarker = 0;
         
@@ -120,10 +156,9 @@ public class LocalizeMarkers : MonoBehaviour
             savedMarkers[currentMarker].SetActive(true);
            
             distanceToMarker = Vector3.Distance(SessionOrigin.camera.transform.position, savedMarkers[currentMarker].transform.position);
-            Debug.Log("Distance to marker : " + distanceToMarker);
+            Debug.Log("Distance to marker (" + currentMarker + ") : " + distanceToMarker);
 
             targetDirection = SessionOrigin.camera.transform.position - savedMarkers[currentMarker].transform.position;
-            //newDirection = Vector3.RotateTowards(pointer.transform.forward, targetDirection, Time.deltaTime, 0.0f);
             pointer.transform.rotation = Quaternion.LookRotation(-targetDirection);
 
             if (distanceToMarker < 2f)
@@ -132,10 +167,12 @@ public class LocalizeMarkers : MonoBehaviour
                 currentMarker++;
             }
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
         }
 
+        //yield return 0;
+
         pointer.SetActive(false);
-        ViewManager.OnReachingDestination();
+        Controller.OnReachingDestination();
     }
 }
