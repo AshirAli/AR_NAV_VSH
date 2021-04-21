@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "ce071717b4f29129047e",
         "name": "com.HashY2K.AR_NAV_VSH",
-        "processId": 27933,
+        "processId": 32060,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -42,6 +42,18 @@
             "deviceId": "ce071717b4f29129047e",
             "name": "com.HashY2K.AR_NAV_VSH",
             "processId": 27933,
+            "exited": false
+        },
+        {
+            "deviceId": "ce071717b4f29129047e",
+            "name": "com.HashY2K.AR_NAV_VSH",
+            "processId": 29535,
+            "exited": false
+        },
+        {
+            "deviceId": "ce071717b4f29129047e",
+            "name": "com.HashY2K.AR_NAV_VSH",
+            "processId": 32060,
             "exited": false
         },
         {

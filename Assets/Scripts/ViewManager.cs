@@ -389,6 +389,7 @@ namespace Google.XR.ARCoreExtensions.Samples.PersistentCloudAnchors
                     // Initial instruction for POI placement:
                     InstructionText.text = "Tap to place POI marker.";
                     DebugText.text = "Tap a horizontal plane...";
+                    ClearButton.gameObject.SetActive(false);
                     return;
 
                 case UIController.ApplicationMode.Resolving:
