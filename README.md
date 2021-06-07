@@ -13,11 +13,6 @@ using markers.
 
 ## TECHNICAL REQUIREMENTS
 
-### Mapbox SDK
-
-○ Get location data from gps.
-○ Location data includes latitude and longitude.
-
 ### ARCore SDK
 
 ○ Marker placement based on location data provided.
